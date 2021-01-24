@@ -3,28 +3,36 @@
   <p>STEP1</p>
   <h3>お客様の情報を入力してください</h3>
   <h4>-性別-</h4>
-  <form>
-    <label><input type="radio" name="sex" v-model="sex" value="male">男性</label>
-    <label><input type="radio" name="sex" v-model="sex" value="female">女性</label>
+  <form @change="changeSex">
+    <label><input type="radio" name="sex" v-model="sex" value="男性">男性</label>
+    <label><input type="radio" name="sex" v-model="sex" value="女性">女性</label>
   </form>
   <h4>-生年月日-</h4>
-  <div @change="checkDays(year, month)">
-    <select v-model="year">
-      <option v-for="(year, index) in years" :value="year" :key="index">
-        {{ year }}
-      </option>
-    </select>年
-    <select v-model="month">
-      <option v-for="(month, index) in months" :value="month" :key="index">
-        {{ month }}
-      </option>
-    </select>月
-    <select v-model="day">
-      <option v-for="(day, index) in days" :value="day" :key="index">
-        {{ day }}
-      </option>
-    </select>日
+  <!--
+  ○○年1月31日を2月変更した際正しく動作するよう、
+  checkDaysの次にchangeBirthdayを発火させるためあえてdivを2重にしている
+  -->
+  <div @change="changeBirthday(year, month, day)">
+    <div @change="checkDays(year, month)">
+      <select v-model="year">
+        <option v-for="(year, index) in years" :value="year" :key="index">
+          {{ year }}
+        </option>
+      </select>年
+      <select v-model="month">
+        <option v-for="(month, index) in months" :value="month" :key="index">
+          {{ month }}
+        </option>
+      </select>月
+      <select v-model="day">
+        <option v-for="(day, index) in days" :value="day" :key="index">
+          {{ day }}
+        </option>
+      </select>日
+    </div>
   </div>
+  {{ userSex }}
+  {{ userBirthday }}
   <nav>
     <router-link to="/Questionnaire"><button v-if="sex">次へ進む</button></router-link>
   </nav>
@@ -82,6 +90,24 @@
             }
           }
         }
+      },
+      changeSex: function(){
+        this.$store.state.userSex = this.sex;
+      },
+      changeBirthday: function(year, month, day){
+        this.birthday = year + '年' + month + '月' + day + '日';
+        this.$store.state.userBirthday = this.birthday;
+      }
+    },
+    created: function(){
+      this.$store.state.userBirthday = year + '年' + month + '月' + day + '日';
+    },
+    computed: {
+      userSex(){
+        return this.$store.state.userSex;
+      },
+      userBirthday(){
+        return this.$store.state.userBirthday;
       }
     }
   }
