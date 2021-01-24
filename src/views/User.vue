@@ -30,6 +30,7 @@
         </option>
       </select>日
     </div>
+  </div>
   <nav>
     <router-link to="/Questionnaire"><button v-if="sex">次へ進む</button></router-link>
   </nav>
