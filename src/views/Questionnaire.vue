@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'questions',
   data: () => {
@@ -44,21 +46,17 @@ export default {
   },
   methods: {
     answer: function(){
-      this.$store.state.infoAnswer1 = this.q1Value;
-      this.$store.state.infoAnswer2 = this.q2Value;
-      this.$store.state.infoAnswer3 = this.q3Value;
+      this.$store.commit('changeUserInfoAnswer1', this.q1Value);
+      this.$store.commit('changeUserInfoAnswer2', this.q2Value);
+      this.$store.commit('changeUserInfoAnswer3', this.q3Value);
     }
   },
   computed: {
-    infoAnswer1(){
-      return this.$store.state.infoAnswer1;
-    },
-    infoAnswer2(){
-      return this.$store.state.infoAnswer2;
-    },
-    infoAnswer3(){
-      return this.$store.state.infoAnswer3;
-    }
+    ...mapGetters([
+      'infoAnswer1State',
+      'infoAnswer2State',
+      'infoAnswer3State'
+    ])
   }
 }
 </script>
