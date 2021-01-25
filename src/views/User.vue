@@ -38,6 +38,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import { years, months, days31, days30, days29, days28 } from '../helpers/Definition'
   // 年月日入力フォームの初期値
   import { year, month, day } from '../helpers/Definition'
@@ -90,23 +91,22 @@
         }
       },
       changeSex: function(){
-        this.$store.state.userSex = this.sex;
+        this.$store.commit('changeUserSex', this.sex);
       },
       changeBirthday: function(year, month, day){
         this.birthday = year + '年' + month + '月' + day + '日';
-        this.$store.state.userBirthday = this.birthday;
+        this.$store.commit('changeUserBirthday', this.birthday);
       }
     },
     created: function(){
-      this.$store.state.userBirthday = year + '年' + month + '月' + day + '日';
+      this.birthday = year + '年' + month + '月' + day + '日';
+      this.$store.commit('changeUserBirthday', this.birthday);
     },
     computed: {
-      userSex(){
-        return this.$store.state.userSex;
-      },
-      userBirthday(){
-        return this.$store.state.userBirthday;
-      }
+      ...mapGetters([
+        'userSexState',
+        'userBirthdayState'
+      ])
     }
   }
 </script>
