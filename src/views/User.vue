@@ -64,7 +64,7 @@
     },
     methods: {
       // 年と月を判別してその月の日数を決める関数
-      checkDays: function(year, month){
+      checkDays(year, month){
         const n = year.split(' ');
         const num = Number(n[0]);
         const m = month;
@@ -90,15 +90,15 @@
           }
         }
       },
-      changeSex: function(){
+      changeSex(){
         this.$store.commit('changeUserSex', this.sex);
       },
-      changeBirthday: function(year, month, day){
+      changeBirthday(year, month, day){
         this.birthday = year + '年' + month + '月' + day + '日';
         this.$store.commit('changeUserBirthday', this.birthday);
       }
     },
-    created: function(){
+    created(){
       this.birthday = year + '年' + month + '月' + day + '日';
       this.$store.commit('changeUserBirthday', this.birthday);
     },
