@@ -22,7 +22,7 @@
       }
     },
     methods: {
-      checkText: function(){
+      checkText(){
         this.$store.commit('changeConsultationText', this.textContent);
       }
     },
