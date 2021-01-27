@@ -45,7 +45,7 @@ export default {
     }
   },
   methods: {
-    answer: function(){
+    answer(){
       this.$store.commit('changeUserInfoAnswer1', this.q1Value);
       this.$store.commit('changeUserInfoAnswer2', this.q2Value);
       this.$store.commit('changeUserInfoAnswer3', this.q3Value);
