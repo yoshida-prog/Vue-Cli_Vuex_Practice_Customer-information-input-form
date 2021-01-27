@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import User from '../views/User.vue'
 import Questionnaire from '../views/Questionnaire.vue'
 import Consultation from '../views/Consultation.vue'
+import Check from '../views/Check.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/Consultation',
     name: 'Consultation',
     component: Consultation
+  },
+  {
+    path: '/Check',
+    name: 'Check',
+    component: Check
   }
 ]
 
